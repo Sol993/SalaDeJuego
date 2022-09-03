@@ -2,9 +2,14 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     color: rgb(80, 134, 181);
+    margin: 15px ;
     
 }
 
 .myImg{
     margin: 12px 0px;
+}
+
+.divMascotas{
+    margin: 15px 0px;
 }
