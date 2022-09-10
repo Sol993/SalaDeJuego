@@ -14,11 +14,16 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="home">Home</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" [ngClass]="{'linkOculto' : logueado}">
             <a class="nav-link" routerLink="login">Ingresa</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="sobremi">Conoceme!</a>
+          </li>
+          <li class="nav-item" [ngClass]="{'linkOculto' : !logueado}">
+            <a class="nav-link " routerLink="login">
+            <button type="button" class="btn btn-danger btn-sm btn-smlogOut"(click)="cerrarSesion()">Cerrar sesión</button>
+            </a>
           </li>
 
         </ul>

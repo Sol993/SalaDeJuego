@@ -30,6 +30,10 @@
     border-top-right-radius: 0;
   }
 
+  .form-signin button{
+    margin-bottom: 10px;
+  }
+
   .form-signin .bi-person-circle {
     color:#27add9;
     margin-bottom: 10px;

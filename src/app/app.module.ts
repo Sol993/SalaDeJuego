@@ -12,6 +12,14 @@ import { NavComponent } from './componentes/nav/nav.component';
 import { CarouselComponent } from './componentes/carousel/carousel.component';
 import { CardsComponent } from './componentes/cards/cards.component';
 
+import {AngularFireAuthModule} from '@angular/fire/compat/auth';
+import {AngularFireModule} from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import { SaladejuegoservicioService } from './servicios/saladejuegoservicio.service';
+
+import { FormsModule } from '@angular/forms';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,13 +30,17 @@ import { CardsComponent } from './componentes/cards/cards.component';
     FooterComponent,
     NavComponent,
     CarouselComponent,
-    CardsComponent
+    CardsComponent, 
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    FormsModule
   ],
-  providers: [],
+  providers: [SaladejuegoservicioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
