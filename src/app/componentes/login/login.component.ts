@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SaladejuegoservicioService} from 'src/app/servicios/saladejuegoservicio.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-
-
+import { Logdeusuarios } from 'src/app/clases/logdeusuarios';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   public email : string = "";
   public password : string = "";
+  logUsuario : Logdeusuarios = new Logdeusuarios();
 
   constructor(private _auth : SaladejuegoservicioService, private _router : Router) { }
 
@@ -25,6 +25,16 @@ export class LoginComponent implements OnInit {
     this._auth.login(this.email,this.password).then(res => { 
      if (res !== null) {
       localStorage.setItem("usuario",JSON.stringify(res));
+      const tiempoTranscurrido = Date.now();
+      const hoy = new Date(tiempoTranscurrido);
+      
+      this.logUsuario.email=this.email;
+      this.logUsuario.fecha= hoy.toUTCString();
+
+      this._auth.crearLogUsuario(this.logUsuario).then(() => {
+       
+      });
+      
       this._router.navigate(['/home']);
 
      }else{
@@ -42,7 +52,6 @@ export class LoginComponent implements OnInit {
         `
       })
      }
-      console.log(res); 
 
     });
   }

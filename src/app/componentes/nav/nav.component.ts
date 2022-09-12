@@ -23,7 +23,6 @@ export class NavComponent implements OnInit {
       if (res !== null) {
         this.logueado = true;
         this.usuario = res;
-        console.log(this.usuario);
       } else {
         this.logueado = false;
       }

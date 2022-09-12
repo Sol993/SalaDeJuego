@@ -18,6 +18,8 @@ import { environment } from 'src/environments/environment';
 import { SaladejuegoservicioService } from './servicios/saladejuegoservicio.service';
 
 import { FormsModule } from '@angular/forms';
+import { RegistroComponent } from './componentes/registro/registro.component';
+import { SaladechatsComponent } from './componentes/saladechats/saladechats.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     NavComponent,
     CarouselComponent,
-    CardsComponent, 
+    CardsComponent,
+    RegistroComponent,
+    SaladechatsComponent, 
     
   ],
   imports: [
