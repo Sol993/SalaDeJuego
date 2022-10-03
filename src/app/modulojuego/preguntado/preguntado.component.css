@@ -1,0 +1,22 @@
+.juego-preguntado{
+    font-family:'Montserrat', sans-serif;
+    
+    padding-bottom: 10rem;
+   
+}
+
+.title-juego
+{
+    color:rgb(80, 134, 181);
+}
+.btn-pais div {
+    max-width: 20rem;
+    
+}
+.btn-pais .btn-outline-success{
+    margin: 1px;    
+    margin-top: 30px;
+    margin-right: 20px;
+    padding: 20px
+    
+}

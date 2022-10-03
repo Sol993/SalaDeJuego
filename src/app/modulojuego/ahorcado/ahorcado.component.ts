@@ -18,6 +18,16 @@ export class AhorcadoComponent implements OnInit {
     'CHUPETE',
     'REMEDIO',
     'PERRO',
+    'MOTO',
+    'MONTAÑA',
+    'MAR',
+    'CARRO',
+    'CABALLO',
+    'FLORES',
+    'ROSA',
+    'MARIPOSA',
+    'FOCA',
+    'ARCO',
   ];
   palabra = '';
   palabraOculta = '';

@@ -30,5 +30,8 @@ export class PreguntadoComponent implements OnInit {
       }
     });
   }
+  reiniciarJuego(){
+    location.href = 'juegos/preguntado';
+  }
 
 }

@@ -1,9 +1,17 @@
-<h1>Listado de paises</h1>
-<img [src]="respuesta.flag" width="50px" />
+<div class="juego-preguntado">
+<h4 class="title-juego text-center">Listado de paises</h4>
+<div class="text-center">
+<img [src]="respuesta.flag" width="200px" />
+</div>
 <div class="row">
-  <div class="col text-center">
-    <button *ngFor="let opcion of opciones" class="btn btn-primary">
+  <div class="col text-center btn-pais">
+    <button *ngFor="let opcion of opciones" class="btn btn-outline-success">
       {{ opcion.name }}
     </button>
   </div>
+</div>
+<hr>
+<div class="text-center">
+  <button (click)='reiniciarJuego()' class="btn btn-warning">Reiniciar</button>
+</div>
 </div>
