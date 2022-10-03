@@ -1,15 +1,37 @@
 <div class="juego-preguntado">
 <h4 class="title-juego text-center">Listado de paises</h4>
 <div class="text-center">
-<img [src]="respuesta.flag" width="200px" />
-</div>
-<div class="row">
-  <div class="col text-center btn-pais">
-    <button *ngFor="let opcion of opciones" class="btn btn-outline-success">
-      {{ opcion.name }}
-    </button>
+  <div *ngIf="!perdio && !gano">
+  <img *ngIf="respuesta" [src]="respuesta.flag" width="200px" />
+  <h3>
+  Puntaje : <small> {{ puntaje }} </small>
+  </h3>
+  <h3>Tienes {{vidas}} vidas</h3>
+  <div class="row" >
+    <div class="col text-center btn-pais">
+      <button
+        (click)="comprobar(opcion)"
+        *ngFor="let opcion of opciones"
+        class="btn btn-outline-success"
+      >
+        {{ opcion.translations.es }}
+      </button>
+    </div>
   </div>
 </div>
+  <div class="row" *ngIf="gano">
+    <div class="col text-center">
+      <h1>FELICIDADES GANASTE!!!</h1>
+    <img src="\assets\imagenes\ahorcado\ganaste.png" alt="" class="ahorcado-img" width="200" />
+    </div>
+  </div>
+  
+  <div class="row" *ngIf="perdio">
+    <div class="col text-center">
+      <h1>LO SIENTO, PERDISTE :(</h1>
+      <img src="\assets\imagenes\ahorcado\perdiste.png" alt="" class="ahorcado-img" width="200" />
+    </div>
+  </div>
 <hr>
 <div class="text-center">
   <button (click)='reiniciarJuego()' class="btn btn-warning">Reiniciar</button>
