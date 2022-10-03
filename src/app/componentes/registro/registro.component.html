@@ -6,20 +6,69 @@
           </svg>
     
           <h2 class="h3 mb-3 fw-normal">Registrate</h2>
-          <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="Email" required [(ngModel)]="this.email">
-            <label for="floatingInput">Email</label>
-          </div>
-          <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" [(ngModel)]="this.password">
-            <label for="floatingPassword">Contraseña</label>
-          </div>
-          <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPasswordDos" placeholder="Password" >
-            <label for="floatingPasswordDos">Ingresa nuevamente la contraseña</label>
-          </div>
-          <button class="w-100 btn btn-lg btn-info" (click)="registro()">Registrate</button>
-         <p class="mt-5 mb-3 text-muted">&copy; Sala de Juegos 2022</p>
+
+          <form novalidate #userForm="ngForm" name="form" (ngSubmit)="userForm.form.valid && registro(userForm)">
+            <div class="form-floating">
+              <input type="email" 
+              name="email" 
+              class="form-control" 
+              id="floatingInput" 
+              placeholder="Email" 
+              [(ngModel)]="form.email"
+              required
+                #email="ngModel"
+                [ngClass]="{ 'is-invalid': userForm.submitted && email.errors }"
+                pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+              />
+              <div *ngIf="userForm.submitted && email.errors && email.invalid" class="invalid-feedback">
+                <div *ngIf="email.errors['required']">Email es obligatorio</div>
+                <div *ngIf="email.errors['pattern']">El correo electrónico no sigue el formato correcto. Sigue este ejemplo: ejemplo@ejemplo.com
+                </div>
+              </div>
+              <label for="floatingInput">Email</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" 
+              name="password" 
+              class="form-control" 
+              id="floatingPassword" 
+              placeholder="Contraseña" 
+              [(ngModel)]="form.password"
+              required
+              minlength="6"
+              maxlength="40"
+              #password="ngModel"
+              [ngClass]="{ 'is-invalid': userForm.submitted && password.errors }"
+              />
+              <div *ngIf="userForm.submitted && password.errors" class="invalid-feedback">
+                <div *ngIf="password.errors['required']">Contraseña es obligatorio</div>
+                <div *ngIf="password.errors['minlength']">Contraseña debe ser mayor a 6 caracteres</div>
+                <div *ngIf="password.errors['maxlength']">Contraseña no debe exceder los 40 caracteres</div>
+              </div>
+              <label for="floatingPassword">Contraseña</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" 
+              name="confirmPassword" 
+              class="form-control" 
+              id="floatingPasswordConfirm" 
+              placeholder="Confirmar contraseña" 
+              [(ngModel)]="form.confirmPassword"
+              required
+              #confirmPassword="ngModel"
+              [ngClass]="{ 'is-invalid': userForm.submitted && confirmPassword.errors }"
+              />
+              <div *ngIf="userForm.submitted && confirmPassword.errors" class="invalid-feedback">
+                <div *ngIf="confirmPassword.errors['required']">
+                  Contraseña es obligatorio
+                </div>      
+              </div> 
+              {{this.coincidencia}}   
+              <label for="floatingPasswordRepeat">Ingresa nuevamente la contraseña</label>
+            </div>
+            <button class="w-100 btn btn-lg btn-info">Registrate</button>
+          </form>
+         <p  class="mt-5 mb-3 text-muted">&copy; Sala de Juegos 2022</p>
       </main>
     </div>
     

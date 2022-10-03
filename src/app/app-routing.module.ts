@@ -14,6 +14,7 @@ const routes: Routes = [
   {path:"sobremi",component:QuiensoyComponent},
   {path:"registro",component:RegistroComponent},
   {path:"saladechats",component:SaladechatsComponent},
+  {path: 'juegos', loadChildren: () => import('./modulojuego/modulojuego.module').then(m => m.ModulojuegoModule) },
   {path:"**",component:ErrorComponent},
 
 ];

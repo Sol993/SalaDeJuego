@@ -9,32 +9,40 @@ import { Logdeusuarios } from 'src/app/clases/logdeusuarios';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
-
-  public email : string = "";
-  public password : string = "";
-  public passwordRepeat : string = "";
-  
+  form = {
+    email: '',
+    password: '',
+    confirmPassword: ''
+  };
+  coincidencia : string = "";
   logUsuario: Logdeusuarios = new Logdeusuarios();
+  
 
   constructor(private _auth : SaladejuegoservicioService, private _router : Router) { }
 
   ngOnInit(): void {
   }
-  registro():void{
-    this._auth.registro(this.email,this.password).then(res=>{
-      if(res != null){
-        const tiempoTranscurrido = Date.now();
-        const hoy = new Date(tiempoTranscurrido);
-        
-        this.logUsuario.email=this.email;
-        this.logUsuario.fecha= hoy.toUTCString();
+  
+  registro(form: any){
+    if(this.form.password === this.form.confirmPassword){
 
-        this._auth.crearLogUsuario(this.logUsuario).then(() => {
-        });
+      this._auth.registro(this.form.email,this.form.password).then(res=>{
+        if(res != null){
+          const tiempoTranscurrido = Date.now();
+          const hoy = new Date(tiempoTranscurrido);
+          
+          this.logUsuario.email=this.form.email;
+          this.logUsuario.fecha= hoy.toUTCString();
 
-        this._router.navigate(['home']);
-     }
-    });
+          this._auth.crearLogUsuario(this.logUsuario).then(() => {
+          });
+
+          this._router.navigate(['home']);
+      }
+      });
+   } else{
+     this.coincidencia = "Las contraseñas deben coincidir";
+   }
   }
 
 }

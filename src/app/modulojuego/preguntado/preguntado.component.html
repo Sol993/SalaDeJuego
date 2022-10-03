@@ -1,0 +1,9 @@
+<h1>Listado de paises</h1>
+<img [src]="respuesta.flag" width="50px" />
+<div class="row">
+  <div class="col text-center">
+    <button *ngFor="let opcion of opciones" class="btn btn-primary">
+      {{ opcion.name }}
+    </button>
+  </div>
+</div>

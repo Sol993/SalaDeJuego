@@ -1,0 +1,17 @@
+.juego-ahorcado{
+    font-family:'Montserrat', sans-serif;
+    margin-bottom: 10rem;
+}
+
+.title-juego
+{
+    color:rgb(80, 134, 181);
+}
+
+.btn-letras div {
+    max-width: 20rem;
+    
+}
+.btn-letras .btn-info{
+    margin: 1px
+}

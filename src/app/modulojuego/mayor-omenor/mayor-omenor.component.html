@@ -1,0 +1,54 @@
+<div class="juego-mayoromenor">
+  <h3 class="title-juego text-center">Mayor o Menor</h3>
+  <div class="m-0 vh-50 row justify-content-center align-items-center ">
+  <div
+    [ngStyle]="{
+      color:
+        this.carta.paloNombre === 'Pica' || this.carta.paloNombre === 'Trebol'
+          ? 'black'
+          : 'red'
+    }"
+    
+    class="col-auto p-5 text-center carta-juego"
+    title="{{ this.carta.nombre }}"
+  >
+  <div>
+    <div class="letter">{{ this.carta.valorNombre }}</div>
+
+    <div [ngSwitch]="this.carta.paloNombre">
+      <div class="suit" *ngSwitchCase="'Pica'">&spades;</div>
+      <div class="suit" *ngSwitchCase="'Trebol'">&clubs;</div>
+      <div class="suit" *ngSwitchCase="'Corazon'">&hearts;</div>
+      <div class="suit" *ngSwitchCase="'Diamante'">&diams;</div>
+    </div>
+  </div>
+  </div>
+  <div class="text-center">
+    <h4>Tu puntaje es: {{puntaje}}</h4>
+    <h4>Tienes : {{vidas}} vidas</h4>
+  </div>
+ </div>
+  <div class="row" *ngIf="!gano && !perdio" >
+    <div class="col-lg-6 text-center"><button (click)="jugar(this.carta, 'mayor')" class="btn btn-success btn-lg">Mayor</button></div>
+    <div class="col-lg-6 text-center"><button (click)="jugar(this.carta, 'menor')" class="btn btn-success btn-lg">Menor</button></div>
+  </div>
+  <div class="row" *ngIf="gano">
+    <div class="col text-center">
+      <h1>FELICIDADES GANASTE!!!</h1>
+      <h4>Puntaje alcanzado: {{ puntaje }}</h4>
+    <img src="\assets\imagenes\ahorcado\ganaste.png" alt="" class="ahorcado-img" width="200" />
+    </div>
+  </div>
+  
+  <div class="row" *ngIf="perdio">
+    <div class="col text-center">
+      <h1>LO SIENTO, PERDISTE :(</h1>
+      <img src="\assets\imagenes\ahorcado\perdiste.png" alt="" class="ahorcado-img" width="200" />
+      <h4>Puntaje alcanzado: {{ puntaje }}</h4>
+    </div>
+  </div>
+  <hr>
+<div class="text-center">
+  <button (click)='reiniciarJuego()' class="btn btn-warning">Reiniciar</button>
+</div>
+</div>

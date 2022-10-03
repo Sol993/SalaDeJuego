@@ -1,0 +1,52 @@
+<div class="juego-ahorcado">
+<h3 class="text-center title-juego">Juego del ahorcado</h3>
+<div class="row">
+  <div class="col-lg-3 text-center">
+    <img src="\assets\imagenes\ahorcado\{{intentos}}.jpeg" alt="" class="ahorcado-img" width="200" />
+   
+  </div>
+  <div class="col-lg-9">
+    <h3>
+      Intentos <small> {{ intentos }} / 6</small>
+    </h3>
+    <div class="row">
+      <div class="col">
+        <h1>{{ palabraOculta }}</h1>
+      </div>
+    </div>
+    <div class="row btn-letras" *ngIf="!gano && !perdio">
+      <div>
+        <button
+          (click)="comprobar(letra, $event)"
+          *ngFor="let letra of letras"
+          class="btn btn-info"
+        >
+          {{ letra }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" *ngIf="gano">
+  <div class="col text-center">
+    <h1>FELICIDADES GANASTE!!!</h1>
+  <img src="\assets\imagenes\ahorcado\ganaste.png" alt="" class="ahorcado-img" width="200" />
+  </div>
+</div>
+
+<div class="row" *ngIf="perdio">
+  <div class="col text-center">
+    <h1>LO SIENTO, PERDISTE :(</h1>
+    <img src="\assets\imagenes\ahorcado\perdiste.png" alt="" class="ahorcado-img" width="200" />
+    <h4>La palabra era: {{ palabra }}</h4>
+  </div>
+</div>
+<hr>
+<div class="text-center">
+  <button (click)='reiniciarJuego()' class="btn btn-warning">Reiniciar</button>
+</div>
+
+</div>
+

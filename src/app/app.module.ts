@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,9 +18,10 @@ import {AngularFireModule} from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { SaladejuegoservicioService } from './servicios/saladejuegoservicio.service';
 
-import { FormsModule } from '@angular/forms';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { SaladechatsComponent } from './componentes/saladechats/saladechats.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -34,15 +36,18 @@ import { SaladechatsComponent } from './componentes/saladechats/saladechats.comp
     CarouselComponent,
     CardsComponent,
     RegistroComponent,
-    SaladechatsComponent, 
+    SaladechatsComponent,
+   
     
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    FormsModule
+    HttpClientModule,
+    
   ],
   providers: [SaladejuegoservicioService],
   bootstrap: [AppComponent]
