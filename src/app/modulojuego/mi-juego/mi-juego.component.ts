@@ -11,6 +11,10 @@ export class MiJuegoComponent implements OnInit {
   peliculas: any;
   respuesta: any;
   titulo: string='';
+  gano = false;
+  perdio = false;
+  titulodepelicula:string='';
+
   constructor(private _service: PeliculasService) {}
 
   ngOnInit() {
@@ -22,6 +26,7 @@ export class MiJuegoComponent implements OnInit {
           Math.floor(Math.random() * this.peliculas.results.length)
         ];
       console.log(this.respuesta);
+      this.titulodepelicula= this.respuesta.title;
     });
   }
 
@@ -31,9 +36,14 @@ export class MiJuegoComponent implements OnInit {
       this.respuesta.title.trim().toLowerCase()
     ) {
       console.log('exito');
+      this.gano = true;
     } else {
+      this.perdio= true;
       console.log('fallo');
     }
+  }
+  reiniciarJuego(){
+    location.href = 'juegos/adivinalapelicula';
   }
 
 }

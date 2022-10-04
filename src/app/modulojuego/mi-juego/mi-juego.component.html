@@ -1,13 +1,36 @@
-<h1>Adivina la pelicula</h1>
-<img
-  *ngIf="respuesta"
-  [src]="
-    'https://image.tmdb.org/t/p/w220_and_h330_face/' + respuesta.backdrop_path
-  "
-/>
-<div class="row">
-  <div class="col text-center">
-    <input type="text" [(ngModel)]="titulo" />
-    <button (click)="comprobar()">Comprobar</button>
+<div class="text-center juego-mijuego">
+  <h4 class="title-juego text ">Adivina la pelicula</h4>
+  <img
+    *ngIf="respuesta"
+    [src]="
+      'https://image.tmdb.org/t/p/w220_and_h330_face/' + respuesta.backdrop_path
+    "
+  />
+  <div class="row">
+    <div class="col text-center">
+      <input type="text" [(ngModel)]="titulo" class="text-pelicula"/><br>
+      <button (click)="comprobar()" class="btn btn-outline-success">Comprobar</button>
+    </div>
   </div>
+  
+
+<div class="row" *ngIf="gano">
+  <div class="col text-center">
+    <h1>FELICIDADES GANASTE!!!</h1>
+  <img src="\assets\imagenes\ahorcado\ganaste.png" alt="" class="ahorcado-img" width="200" />
+  </div>
+</div>
+
+<div class="row" *ngIf="perdio">
+  <div class="col text-center">
+    <h1>LO SIENTO, PERDISTE :(</h1>
+    <img src="\assets\imagenes\ahorcado\perdiste.png" alt="" class="ahorcado-img" width="200" />
+      <h4>La pelicula era {{titulodepelicula}}</h4>
+  </div>
+</div>
+<hr>
+<div class="text-center">
+  <button (click)='reiniciarJuego()' class="btn btn-warning">Reiniciar</button>
+</div>
+  
 </div>

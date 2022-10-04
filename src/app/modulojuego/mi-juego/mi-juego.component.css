@@ -1,0 +1,17 @@
+.juego-mijuego{
+    font-family:'Montserrat', sans-serif;
+    margin-bottom: 1rem;
+}
+
+.title-juego
+{
+    color:rgb(80, 134, 181);
+}
+.btn-outline-success{    
+    margin-top: 10px;
+    margin-right: 10px;      
+}
+.text-pelicula{
+    margin-top: 10px;
+    margin-right: 10px;   
+}
