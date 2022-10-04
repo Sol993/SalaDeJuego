@@ -7,6 +7,8 @@ import { MayorOMenorComponent } from './mayor-omenor/mayor-omenor.component';
 import { AhorcadoComponent } from './ahorcado/ahorcado.component';
 import { MiJuegoComponent } from './mi-juego/mi-juego.component';
 import { PreguntadoComponent } from './preguntado/preguntado.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { PreguntadoComponent } from './preguntado/preguntado.component';
   ],
   imports: [
     CommonModule,
-    ModulojuegoRoutingModule
+    ModulojuegoRoutingModule,
+    FormsModule
   ]
 })
 export class ModulojuegoModule { }

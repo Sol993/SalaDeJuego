@@ -1,1 +1,13 @@
-<p>mi-juego works!</p>
+<h1>Adivina la pelicula</h1>
+<img
+  *ngIf="respuesta"
+  [src]="
+    'https://image.tmdb.org/t/p/w220_and_h330_face/' + respuesta.backdrop_path
+  "
+/>
+<div class="row">
+  <div class="col text-center">
+    <input type="text" [(ngModel)]="titulo" />
+    <button (click)="comprobar()">Comprobar</button>
+  </div>
+</div>
