@@ -7,6 +7,8 @@ import Swal from 'sweetalert2';
 import firebase from '@firebase/app-compat';
 import { Logdeusuarios } from '../clases/logdeusuarios';
 import { Saladechats } from '../clases/saladechats';
+import { Resultadojuegos } from '../clases/resultadojuegos';
+import { Usuario } from '../clases/usuario';
 
 
 @Injectable({
@@ -15,11 +17,15 @@ import { Saladechats } from '../clases/saladechats';
 export class SaladejuegoservicioService {
   private logCollectionName: AngularFirestoreCollection<Logdeusuarios>;
   private salaDechats: AngularFirestoreCollection<Saladechats>;
+  private resultadosJuegos: AngularFirestoreCollection<Resultadojuegos>;
+  private usuario: AngularFirestoreCollection<Usuario>;
 
 
   constructor(private _auth :AngularFireAuth, private _db :AngularFirestore) {
     this.logCollectionName = _db.collection('logUsuarios');
     this.salaDechats = _db.collection('salaDeChats');
+    this.resultadosJuegos = _db.collection('resultadoJuegos');
+    this.usuario = _db.collection('usuarios');
 
    }
 
@@ -72,11 +78,25 @@ export class SaladejuegoservicioService {
 
  crearLogUsuario(loguser: Logdeusuarios): any {
   return this.logCollectionName.add({ ...loguser });
-}
-sumarMensaje(mensaje: Saladechats): any {
-  return this.salaDechats.add({ ...mensaje });
-}
-getSalaDeChats(): AngularFirestoreCollection<Saladechats> {
-  return this.salaDechats;
-}
+ }
+  sumarMensaje(mensaje: Saladechats): any {
+    return this.salaDechats.add({ ...mensaje });
+  }
+  getSalaDeChats(): AngularFirestoreCollection<Saladechats> {
+    return this.salaDechats;
+  }
+  
+  guardarPuntaje(puntaje: Resultadojuegos): any {
+    return this.resultadosJuegos.add({ ...puntaje });
+  }
+
+  guardarUsuario(user: Usuario): any {
+    return this.usuario.add({ ...user });
+  }
+
+  obtenerUsuarioPorID(idFilter: string):  AngularFirestoreCollection<Usuario>{
+   return  this._db.collection('usuarios', ref => ref.where('idUsuario','==', idFilter ));
+  }
+
+
 }

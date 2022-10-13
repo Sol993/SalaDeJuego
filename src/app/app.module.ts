@@ -21,6 +21,8 @@ import { SaladejuegoservicioService } from './servicios/saladejuegoservicio.serv
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { SaladechatsComponent } from './componentes/saladechats/saladechats.component';
 import { HttpClientModule } from '@angular/common/http';
+import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
+import { ResultadoencuestaComponent } from './componentes/resultadoencuesta/resultadoencuesta.component';
 
 
 
@@ -37,6 +39,8 @@ import { HttpClientModule } from '@angular/common/http';
     CardsComponent,
     RegistroComponent,
     SaladechatsComponent,
+    EncuestaComponent,
+    ResultadoencuestaComponent,
    
     
   ],

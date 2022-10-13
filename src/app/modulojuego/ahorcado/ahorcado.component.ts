@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Resultadojuegos } from 'src/app/clases/resultadojuegos';
+import { SaladejuegoservicioService } from 'src/app/servicios/saladejuegoservicio.service';
 
 @Component({
   selector: 'app-ahorcado',
@@ -66,11 +68,26 @@ export class AhorcadoComponent implements OnInit {
     'Y',
     'Z',
   ];
+  puntaje : number = 0;
+  puntajeFinal : Resultadojuegos = new Resultadojuegos();
+  logueado: boolean = false;
+  usuario: any;
 
-  constructor() {
+  constructor(private _serv : SaladejuegoservicioService) {
     this.palabra =
       this.palabras[Math.floor(Math.random() * this.palabras.length)];
     this.palabraOculta = '_ '.repeat(this.palabra.length);
+
+    this._serv.getInfoUsuarioLoggeado().subscribe(res => {
+      if (res !== null) {
+        this.logueado = true;
+        this.usuario = res;
+        console.log(this.usuario);
+        
+      } else {
+        this.logueado = false;
+      }
+    })
   }
 
   ngOnInit() {}
@@ -96,7 +113,8 @@ export class AhorcadoComponent implements OnInit {
 
     if (palabraEvaluar === this.palabra) {
       this.gano = true;
-      console.log('Usuario GANO');
+      this.puntaje = this.palabra.length;
+      this.guardarResultado();
     }
 
     if (this.intentos >= this.vidas) {
@@ -118,4 +136,20 @@ export class AhorcadoComponent implements OnInit {
     location.href = 'juegos/ahorcado';
   }
 
-}
+  guardarResultado() {
+    if(this.logueado){
+      this.puntajeFinal.juego = "Ahorcado";
+      this.puntajeFinal.usuario = this.usuario.uid;
+      this.puntajeFinal.email = this.usuario.email;
+      this.puntajeFinal.fecha = new Date(Date.now()).toLocaleString();
+      this.puntajeFinal.puntaje = this.puntaje;
+      
+      this._serv.guardarPuntaje(this.puntajeFinal);
+
+    }
+  
+  }
+
+
+  }
+ 

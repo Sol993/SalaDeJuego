@@ -1,0 +1,109 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-center">Encuesta de Satisfacción.</h1>
+        <p class="text-center">Sala de juegos Solange Correa.</p>
+      </div>
+    </div>
+    <hr><br />
+    <div class="row">
+        <div class="col-md-12">
+          <h3>Datos basicos</h3>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6">
+                <label for="nombreCompleto">Nombre: *</label>
+                <input type="text" class="form-control" id="nombreCompleto" maxlength="128" placeholder="Nombre Completo" required>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="apellido">Apellido: *</label>
+                  <input type="text" class="form-control" id="apellido" maxlength="128" placeholder="Apellido" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form_group">
+                      <label for="edadEncuestado">Edad: *</label>
+                      <input type="number" class="form-control" id="edadEncuestado" placeholder="Edad" maxlength="3" required/>
+                    </div>
+                  </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                    <label for="telefono">Telefono: *</label>
+                    <input type="text" class="form-control" id="telefono" placeholder="Numero Telefonico" maxlength="12" required/>
+                </div>
+              </div>
+             
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+          <h3>Preguntas</h3>
+        </div>
+        <div class="col-md-12">
+            <!--  PREGUNTA 1  -->
+            <div class="row">
+                <div class="col-md-6">
+                <p>1 - ¿Recomendaria esta sala de juegos a otras personas?</p>
+                </div>
+                <div class="col-md-2">
+                <label class="radio">
+                <input type="radio" name="pregunta1" id="pregunta1a" value="SI"> Si
+                </label>
+                </div>
+                <div class="col-md-2">
+                <label class="radio">
+                <input type="radio" name="pregunta1" id="preguntab" value="NO"> No
+                </label>
+                </div>
+                <div class="col-md-2">
+                <label class="radio">
+                <input type="radio" name="pregunta1" id="preguntac" value="NA"> N/A
+                </label>
+                </div>
+            </div>
+            <!--  PREGUNTA 2  -->
+            <div class="row">
+                <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-8">
+                    <p>2 - ¿Cómo calificaría su experiencia respecto a los juegos de esta aplicación</p>
+                    </div>
+                    <div class="col-md-4">
+                    <select class="form-control" id="pregunta2">
+                    <option value="5">Muy Buena</option>
+                    <option value="4">Buena</option>
+                    <option value="3">Regular</option>
+                    <option value="2">Mala</option>
+                    <option value="1">Muy Mala</option>
+                    <option value="0">No Responde</option>
+                    </select>
+                    </div>
+                </div>
+                </div>
+            </div>
+             <!--  PREGUNTA 3  -->
+
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="comment">3 - Comentario:</label>
+                    <textarea class="form-control" rows="6" id="comentarios"></textarea>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+              <button type="button" class="btn btn-info" id="saveForm" onclick="saveForm">Guardar Encuesta</button>
+              <button type="button" class="btn btn-danger" id="clearForm">Limpiar formulario</button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Resultadojuegos } from 'src/app/clases/resultadojuegos';
 import { PaisesService } from 'src/app/servicios/paises.service';
+import { SaladejuegoservicioService } from 'src/app/servicios/saladejuegoservicio.service';
 
 @Component({
   selector: 'app-preguntado',
@@ -16,8 +18,22 @@ export class PreguntadoComponent implements OnInit {
   puntaje: number = 0;
   gano = false;
   perdio = false;
-
-  constructor(private _service: PaisesService) {}
+  logueado: boolean = false;
+  usuario: any;
+  puntajeFinal : Resultadojuegos = new Resultadojuegos();
+  
+  constructor(private _service: PaisesService, private _serv :SaladejuegoservicioService) {
+    this._serv.getInfoUsuarioLoggeado().subscribe(res => {
+      if (res !== null) {
+        this.logueado = true;
+        this.usuario = res;
+        console.log(this.usuario);
+        
+      } else {
+        this.logueado = false;
+      }
+    })
+  }
 
   ngOnInit() {
     this._service.getCountries().subscribe((response) => {
@@ -35,11 +51,13 @@ export class PreguntadoComponent implements OnInit {
 
     if (this.vidas == 0) {
      this.perdio=true;
+     this.guardarResultado();
     } else {
       this.iniciarJuego();
     }
     if (this.puntaje == 250) {
       this.gano=true;
+      this.guardarResultado();
     }
   }
 
@@ -67,6 +85,20 @@ export class PreguntadoComponent implements OnInit {
   }
   reiniciarJuego(){
     location.href = 'juegos/preguntado';
+  }
+
+  guardarResultado() {
+    if(this.logueado){
+      this.puntajeFinal.juego = "Preguntado Paises";
+      this.puntajeFinal.usuario = this.usuario.uid;
+      this.puntajeFinal.email = this.usuario.email;
+      this.puntajeFinal.fecha = new Date(Date.now()).toLocaleString();
+      this.puntajeFinal.puntaje = this.puntaje;
+      
+      this._serv.guardarPuntaje(this.puntajeFinal);
+
+    }
+  
   }
 
 }
