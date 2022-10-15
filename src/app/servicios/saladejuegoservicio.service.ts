@@ -9,6 +9,8 @@ import { Logdeusuarios } from '../clases/logdeusuarios';
 import { Saladechats } from '../clases/saladechats';
 import { Resultadojuegos } from '../clases/resultadojuegos';
 import { Usuario } from '../clases/usuario';
+import { Rol } from '../clases/rol';
+import { map } from 'rxjs';
 
 
 @Injectable({
@@ -19,7 +21,7 @@ export class SaladejuegoservicioService {
   private salaDechats: AngularFirestoreCollection<Saladechats>;
   private resultadosJuegos: AngularFirestoreCollection<Resultadojuegos>;
   private usuario: AngularFirestoreCollection<Usuario>;
-
+  public currentUser: any;
 
   constructor(private _auth :AngularFireAuth, private _db :AngularFirestore) {
     this.logCollectionName = _db.collection('logUsuarios');
@@ -30,11 +32,21 @@ export class SaladejuegoservicioService {
    }
 
   //login y registro
-  async login(email:string, password: string)
+ async login(email:string, password: string)
   {
     try
     {
-      return await this._auth.signInWithEmailAndPassword(email,password);
+     // return await this._auth.signInWithEmailAndPassword(email,password);
+     return this._auth.signInWithEmailAndPassword(email, password)
+     .then((user)=>{
+       this._db.collection("usuarios").ref.where("email", "==", user.user?.email).onSnapshot(snap =>{
+         snap.forEach(userRef => {
+           this.currentUser = userRef.data();
+           console.log(this.currentUser)
+
+         })
+       })
+      })
     }
     catch(error)
     {
@@ -95,8 +107,10 @@ export class SaladejuegoservicioService {
   }
 
   obtenerUsuarioPorID(idFilter: string):  AngularFirestoreCollection<Usuario>{
-   return  this._db.collection('usuarios', ref => ref.where('idUsuario','==', idFilter ));
+   return this._db.collection('usuarios', ref => ref.where('idUsuario','==', idFilter ));
   }
+
+  
 
 
 }

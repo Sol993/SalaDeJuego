@@ -25,8 +25,7 @@ export class LoginComponent implements OnInit {
     this._auth.login(this.email,this.password).then(res => { 
      if (res !== null) {
       localStorage.setItem("usuario",JSON.stringify(res));
-      const tiempoTranscurrido = Date.now();
-      const hoy = new Date(tiempoTranscurrido);
+      const hoy = new Date(Date.now().toLocaleString());
       
       this.logUsuario.email=this.email;
       this.logUsuario.fecha= hoy.toUTCString();
