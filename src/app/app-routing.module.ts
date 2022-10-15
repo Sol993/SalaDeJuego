@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Resultadojuegos } from './clases/resultadojuegos';
 import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
 import { ErrorComponent } from './componentes/error/error.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { QuiensoyComponent } from './componentes/quiensoy/quiensoy.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
+import { ResultadoencuestaComponent } from './componentes/resultadoencuesta/resultadoencuesta.component';
 import { SaladechatsComponent } from './componentes/saladechats/saladechats.component';
 import { RolusuarioGuard } from './guards/rolusuario.guard';
 
@@ -17,6 +19,7 @@ const routes: Routes = [
   {path:"registro",component:RegistroComponent},
   {path:"saladechats",component:SaladechatsComponent},
   {path:"encuesta",component:EncuestaComponent},
+  {path:"listadoencuesta",component:ResultadoencuestaComponent},
   {path:"bla",component:EncuestaComponent,canActivate: [RolusuarioGuard]},
   {path: 'juegos', loadChildren: () => import('./modulojuego/modulojuego.module').then(m => m.ModulojuegoModule) },
   {path:"**",component:ErrorComponent},

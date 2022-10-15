@@ -1,6 +1,10 @@
 <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12 text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-clipboard2-fill" viewBox="0 0 16 16">
+          <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"/>
+          <path d="M3.5 1h.585A1.498 1.498 0 0 0 4 1.5V2a1.5 1.5 0 0 0 1.5 1.5h5A1.5 1.5 0 0 0 12 2v-.5c0-.175-.03-.344-.085-.5h.585A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-12A1.5 1.5 0 0 1 3.5 1Z"/>
+        </svg>
         <h1 class="text-center">Encuesta de Satisfacción.</h1>
         <p class="text-center">Sala de juegos Solange Correa.</p>
       </div>
@@ -10,100 +14,136 @@
         <div class="col-md-12">
           <h3>Datos basicos</h3>
         </div>
-        <div class="col-md-12">
-            <div class="row">
-              <div class="col-md-6">
-                <label for="nombreCompleto">Nombre: *</label>
-                <input type="text" class="form-control" id="nombreCompleto" maxlength="128" placeholder="Nombre Completo" required>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="apellido">Apellido: *</label>
-                  <input type="text" class="form-control" id="apellido" maxlength="128" placeholder="Apellido" required>
-                </div>
-              </div>
-            </div>
-            <div class="row">
+        <form [formGroup]="altaForm" (ngSubmit)="aceptar()">
+         <div>   
+          <div class="col-md-12">
+              <div class="row">
                 <div class="col-md-6">
-                    <div class="form_group">
-                      <label for="edadEncuestado">Edad: *</label>
-                      <input type="number" class="form-control" id="edadEncuestado" placeholder="Edad" maxlength="3" required/>
-                    </div>
-                  </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                    <label for="telefono">Telefono: *</label>
-                    <input type="text" class="form-control" id="telefono" placeholder="Numero Telefonico" maxlength="12" required/>
+                  <label for="nombreCompletolabel">Nombre: *</label>
+                  <input type="text" class="form-control" id="nombreCompleto"  placeholder="Nombre Completo" formControlName="nombreCompleto" >
+                  <small class="invalid" 
+                    *ngIf="altaForm.controls.nombreCompleto.errors?.['required'] &&
+                    altaForm.controls.nombreCompleto.touched">
+                    El nombre es requerido
+                  </small> 
                 </div>
-              </div>
-             
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-          <h3>Preguntas</h3>
-        </div>
-        <div class="col-md-12">
-            <!--  PREGUNTA 1  -->
-            <div class="row">
                 <div class="col-md-6">
-                <p>1 - ¿Recomendaria esta sala de juegos a otras personas?</p>
-                </div>
-                <div class="col-md-2">
-                <label class="radio">
-                <input type="radio" name="pregunta1" id="pregunta1a" value="SI"> Si
-                </label>
-                </div>
-                <div class="col-md-2">
-                <label class="radio">
-                <input type="radio" name="pregunta1" id="preguntab" value="NO"> No
-                </label>
-                </div>
-                <div class="col-md-2">
-                <label class="radio">
-                <input type="radio" name="pregunta1" id="preguntac" value="NA"> N/A
-                </label>
-                </div>
-            </div>
-            <!--  PREGUNTA 2  -->
-            <div class="row">
-                <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-8">
-                    <p>2 - ¿Cómo calificaría su experiencia respecto a los juegos de esta aplicación</p>
-                    </div>
-                    <div class="col-md-4">
-                    <select class="form-control" id="pregunta2">
-                    <option value="5">Muy Buena</option>
-                    <option value="4">Buena</option>
-                    <option value="3">Regular</option>
-                    <option value="2">Mala</option>
-                    <option value="1">Muy Mala</option>
-                    <option value="0">No Responde</option>
-                    </select>
-                    </div>
-                </div>
-                </div>
-            </div>
-             <!--  PREGUNTA 3  -->
-
-            <div class="row">
-                <div class="col-md-12">
                   <div class="form-group">
-                    <label for="comment">3 - Comentario:</label>
-                    <textarea class="form-control" rows="6" id="comentarios"></textarea>
+                    <label for="apellido">Apellido: *</label>
+                    <input type="text" class="form-control" id="apellido" maxlength="128" placeholder="Apellido" formControlName="apellido" >
                   </div>
+                  <small class="invalid"
+                    *ngIf="altaForm.controls.apellido.errors?.['required'] &&
+                    altaForm.controls.apellido.touched">
+                    El apellido es requerido
+                  </small>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-              <button type="button" class="btn btn-info" id="saveForm" onclick="saveForm">Guardar Encuesta</button>
-              <button type="button" class="btn btn-danger" id="clearForm">Limpiar formulario</button>
-            </div>
-        </div>
-    </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form_group">
+                        <label for="edadEncuestado">Edad: *</label>
+                        <input type="number" class="form-control" id="edadEncuestado" placeholder="Edad" maxlength="3" formControlName="edadEncuestado" />
+                      </div>
+                      <small class="invalid"
+                        *ngIf="altaForm.controls.edadEncuestado.errors?.['min'] || 
+                        altaForm.controls.edadEncuestado.errors?.['max'] &&
+                        altaForm.controls.edadEncuestado.touched">
+                        La edad debe ser de 18 a 99 años
+                      </small>
+                    </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label for="telefono">Telefono: *</label>
+                      <input type="text" class="form-control" id="telefono" placeholder="Numero Telefonico" maxlength="12" formControlName="telefono"/>
+                      <small class="invalid"
+                        *ngIf="altaForm.controls.telefono.errors?.['required'] &&
+                        altaForm.controls.telefono.touched">
+                        El telfono es obligatorio
+                      </small>
+                    </div>
+                </div>
+              
+              </div>
+          </div>
+      </div>
 
+      <div class="row">
+          <div class="col-md-12">
+            <h3>Preguntas</h3>
+          </div>
+          <div class="col-md-12">
+              <!--  PREGUNTA 1  -->
+              <div class="row">
+                  <div class="col-md-6">
+                  <p>1 - ¿Recomendaria esta sala de juegos a otras personas?</p>
+                  </div>
+                  <div class="col-md-2">
+                  <label class="radio" id="pregunta1label" >
+                  <input type="radio" name="pregunta1" id="pregunta1a" value="SI" formControlName="pregunta1"> Si
+                  </label>
+                  </div>
+                  <div class="col-md-2">
+                  <label class="radio">
+                  <input type="radio" name="pregunta1" id="preguntab" value="NO" formControlName="pregunta1"> No
+                  </label>
+                  </div>
+                  <div class="col-md-2">
+                  <label class="radio">
+                  <input type="radio" name="pregunta1" id="preguntac" value="NA" formControlName="pregunta1"> N/A
+                  </label>
+                  <div *ngIf="altaForm.controls.pregunta1.touched && altaForm.controls.pregunta1.invalid" class="alert alert-danger">
+                    <div *ngIf="altaForm.controls.pregunta1.errors">Es requerido</div>
+                </div>
+                  </div>
+              </div>
+              <!--  PREGUNTA 2  -->
+              <div class="row">
+                  <div class="col-md-12">
+                  <div class="row">
+                      <div class="col-md-8">
+                      <p>2 - ¿Cómo calificaría su experiencia respecto a los juegos de esta aplicación</p>
+                      </div>
+                      <div class="col-md-4">
+                      <select class="form-control" id="pregunta2" formControlName="pregunta2">
+                      <option value="5 - Muy Buena">Muy Buena</option>
+                      <option value="4 - Buena">Buena</option>
+                      <option value="3 - Regular">Regular</option>
+                      <option value="2 - Mala">Mala</option>
+                      <option value="1 - Muy Mala">Muy Mala</option>
+                      <option value="0 - No Responde">No Responde</option>
+                      </select>
+                        <small class="invalid"
+                          *ngIf="altaForm.controls.pregunta2.errors?.['required'] &&
+                          altaForm.controls.pregunta2.touched">
+                          Responde la pregunta
+                        </small>
+                      </div>
+                  </div>
+                  </div>
+              </div>
+              <!--  PREGUNTA 3  -->
+
+              <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="comment">3 - Comentario:</label>
+                      <textarea class="form-control" rows="6" id="comentarios" formControlName="comentarios"></textarea>
+                      <small class="invalid"
+                      *ngIf="altaForm.controls.comentarios.errors?.['required'] &&
+                      altaForm.controls.comentarios.touched">
+                       Responde la pregunta
+                    </small>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row div-encuesta">
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-info btn-encuesta" id="saveForm" [disabled]="altaForm.invalid" >Guardar Encuesta</button>
+                <button type="button" class="btn btn-danger btn-encuesta" id="clearForm">Limpiar formulario</button>
+              </div>
+          </div>
+      </div>
+  </form>
 </div>

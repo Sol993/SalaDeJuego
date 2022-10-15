@@ -1,1 +1,28 @@
-<p>resultadoencuesta works!</p>
+<h3 class="text-center title-juego">Respuesta de la encuesta</h3>
+<hr>
+<div class="text-center div-tabla">
+    <table class="table table-dark table-sm primary">
+        <thead class="table-light">
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Edad</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Si recomendaria esta sala de juegos a otras personas</th>
+            <th scope="col">Calificaría de su experiencia respecto a los juegos</th>
+            <th scope="col">Comentario </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of arrayEncuesta;">
+            <th scope="row">{{item.nombreCompleto}}</th>
+            <td>{{item.apellido}}</td>
+            <td>{{item.edadEncuestado}}</td>
+            <td>{{item.telefono}}</td>
+            <td>{{item.pregunta1}}</td>
+            <td>{{item.pregunta2}}</td>
+            <td>{{item.comentarios}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

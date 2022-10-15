@@ -21,6 +21,9 @@
             <a class="nav-link" routerLink="saladechats">Sala de chats</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="encuesta">Encuesta</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" routerLink="sobremi">Conoceme!</a>
           </li>
           <li class="nav-item" [ngClass]="{'linkOculto' : !logueado}">
@@ -28,7 +31,6 @@
             <button type="button" class="btn btn-danger btn-sm btn-smlogOut"(click)="cerrarSesion()">Cerrar sesión</button>
             </a>
           </li>
-
         </ul>
       </div>
     </div>

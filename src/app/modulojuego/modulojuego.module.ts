@@ -8,6 +8,7 @@ import { AhorcadoComponent } from './ahorcado/ahorcado.component';
 import { MiJuegoComponent } from './mi-juego/mi-juego.component';
 import { PreguntadoComponent } from './preguntado/preguntado.component';
 import { FormsModule } from '@angular/forms';
+import { ListadoresultadosComponent } from './listadoresultados/listadoresultados.component';
 
 
 
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     MayorOMenorComponent,
     AhorcadoComponent,
     MiJuegoComponent,
-    PreguntadoComponent
+    PreguntadoComponent,
+    ListadoresultadosComponent
   ],
   imports: [
     CommonModule,

@@ -11,6 +11,7 @@ import { Resultadojuegos } from '../clases/resultadojuegos';
 import { Usuario } from '../clases/usuario';
 import { Rol } from '../clases/rol';
 import { map } from 'rxjs';
+import { Encuesta } from '../clases/formulario';
 
 
 @Injectable({
@@ -22,12 +23,15 @@ export class SaladejuegoservicioService {
   private resultadosJuegos: AngularFirestoreCollection<Resultadojuegos>;
   private usuario: AngularFirestoreCollection<Usuario>;
   public currentUser: any;
+  private encuesta: AngularFirestoreCollection<any>;
 
   constructor(private _auth :AngularFireAuth, private _db :AngularFirestore) {
     this.logCollectionName = _db.collection('logUsuarios');
     this.salaDechats = _db.collection('salaDeChats');
     this.resultadosJuegos = _db.collection('resultadoJuegos');
     this.usuario = _db.collection('usuarios');
+    this.encuesta = _db.collection('encuesta');
+
 
    }
 
@@ -97,11 +101,6 @@ export class SaladejuegoservicioService {
   getSalaDeChats(): AngularFirestoreCollection<Saladechats> {
     return this.salaDechats;
   }
-  
-  guardarPuntaje(puntaje: Resultadojuegos): any {
-    return this.resultadosJuegos.add({ ...puntaje });
-  }
-
   guardarUsuario(user: Usuario): any {
     return this.usuario.add({ ...user });
   }
@@ -110,6 +109,21 @@ export class SaladejuegoservicioService {
    return this._db.collection('usuarios', ref => ref.where('idUsuario','==', idFilter ));
   }
 
+  //ResultadoJuego
+  guardarPuntaje(puntaje: Resultadojuegos): any {
+    return this.resultadosJuegos.add({ ...puntaje });
+  }
+  traerListadoResultado(): AngularFirestoreCollection<Resultadojuegos> {
+    return this.resultadosJuegos;
+  }
+  
+  ///Encuestas
+  agregarEncuesta(encues: any): any {
+    return this.encuesta.add({ ...encues});
+  }
+  traerListadoEncuesta(): AngularFirestoreCollection<Encuesta> {
+    return this.encuesta;
+  }
   
 
 
