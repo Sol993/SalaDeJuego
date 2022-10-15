@@ -11,6 +11,9 @@ import { SaladejuegoservicioService } from 'src/app/servicios/saladejuegoservici
 export class ListadoresultadosComponent implements OnInit {
 
   arrayResultadoJuegos? : Resultadojuegos[];
+  public usuario: any;
+  public logueado: boolean = false;
+
 
   constructor(private _auth : SaladejuegoservicioService) 
   {
@@ -19,6 +22,8 @@ export class ListadoresultadosComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerListado();
+    this.consultaSiEstaLogeado();
+    
   }
 
   obtenerListado(): void {
@@ -32,5 +37,15 @@ export class ListadoresultadosComponent implements OnInit {
       this.arrayResultadoJuegos = data;
     });
   }
+consultaSiEstaLogeado(){
+  this._auth.getInfoUsuarioLoggeado().subscribe(res => {
+    if (res !== null) {
+      this.logueado = true;
+      this.usuario = res;
 
+    } else {
+      this.logueado = false;
+    }
+  })
+}
 }
