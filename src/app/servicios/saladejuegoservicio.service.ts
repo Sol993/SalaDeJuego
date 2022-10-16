@@ -9,8 +9,6 @@ import { Logdeusuarios } from '../clases/logdeusuarios';
 import { Saladechats } from '../clases/saladechats';
 import { Resultadojuegos } from '../clases/resultadojuegos';
 import { Usuario } from '../clases/usuario';
-import { Rol } from '../clases/rol';
-import { map } from 'rxjs';
 import { Encuesta } from '../clases/formulario';
 
 
@@ -24,6 +22,7 @@ export class SaladejuegoservicioService {
   private usuario: AngularFirestoreCollection<Usuario>;
   public currentUser: any;
   private encuesta: AngularFirestoreCollection<any>;
+
 
   constructor(private _auth :AngularFireAuth, private _db :AngularFirestore) {
     this.logCollectionName = _db.collection('logUsuarios');
@@ -46,8 +45,9 @@ export class SaladejuegoservicioService {
        this._db.collection("usuarios").ref.where("email", "==", user.user?.email).onSnapshot(snap =>{
          snap.forEach(userRef => {
            this.currentUser = userRef.data();
-           console.log(this.currentUser)
-
+           localStorage.setItem("usuario",JSON.stringify(this.currentUser))
+           localStorage.setItem('rol',this.currentUser.rol);
+           console.log(this.currentUser.rol);
          })
        })
       })
@@ -58,6 +58,7 @@ export class SaladejuegoservicioService {
       return null;
     }
   }
+  
   async registro(email:string,password:string)
   {
     try
@@ -85,6 +86,8 @@ export class SaladejuegoservicioService {
   async logOut()
   {
     this._auth.signOut();
+    localStorage.removeItem('rol'),
+    localStorage.removeItem('usuario')
   }
   getInfoUsuarioLoggeado()
   {

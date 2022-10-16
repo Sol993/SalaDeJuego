@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { ReCaptchaEnterpriseProvider } from 'firebase/app-check';
 import { map, Observable } from 'rxjs';
 import { Rol } from '../clases/rol';
+import { Usuario } from '../clases/usuario';
 import { SaladejuegoservicioService } from '../servicios/saladejuegoservicio.service';
 
 @Injectable({
@@ -12,7 +13,6 @@ import { SaladejuegoservicioService } from '../servicios/saladejuegoservicio.ser
 export class RolusuarioGuard implements CanActivate {
 
   admin: boolean = false;
-  usuario: any;
 
   constructor(private router: Router, private _serv: SaladejuegoservicioService) {
   
@@ -21,19 +21,26 @@ export class RolusuarioGuard implements CanActivate {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean{
-   this.usuario = this._serv.currentUser;
-    if (this.usuario && this.usuario.rol == Rol.Administrador) {
+    state: RouterStateSnapshot): Observable <boolean>| Promise<boolean> | boolean{
+    let rol= localStorage.getItem("rol");
+   
+    if ( rol == "Administrador") {
       this.admin = true;
     } else {
       this.router.navigate(['home']);
 
     }     
-    return this.admin; 
+  return this.admin;
+
+
+ 
       
      
      
-    /* this._serv.getInfoUsuarioLoggeado().subscribe(res => {
+    /* 
+     
+
+    this._serv.getInfoUsuarioLoggeado().subscribe(res => {
         if (res !== null) {
           this.usuarioLoggeado = res;
           this._serv.obtenerUsuarioPorID(this.usuarioLoggeado.uid).snapshotChanges().pipe(

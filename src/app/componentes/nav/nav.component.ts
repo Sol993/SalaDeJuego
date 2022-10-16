@@ -9,12 +9,14 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
   public logueado: boolean = false;
+  public logueadoAdmin: boolean = false;
   public usuario: any;
 
   constructor(private _auth: SaladejuegoservicioService,private _router : Router) { }
 
   ngOnInit(): void {
     this.usuarioLogueado();
+    this.usuarioAdmin();
   }
 
 
@@ -34,6 +36,14 @@ export class NavComponent implements OnInit {
       localStorage.removeItem("usuario");
       this._router.navigate(['/']);
     });
+  }
+  usuarioAdmin(){
+    let rol= localStorage.getItem("rol");
+    if ( rol == "Administrador") {
+      this.logueadoAdmin=true;
+    } else {
+      this.logueadoAdmin = false;
+    }
   }
 
 }

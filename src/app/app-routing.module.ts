@@ -19,8 +19,7 @@ const routes: Routes = [
   {path:"registro",component:RegistroComponent},
   {path:"saladechats",component:SaladechatsComponent},
   {path:"encuesta",component:EncuestaComponent},
-  {path:"listadoencuesta",component:ResultadoencuestaComponent},
-  {path:"bla",component:EncuestaComponent,canActivate: [RolusuarioGuard]},
+  {path:"listadoencuesta",component:ResultadoencuestaComponent,canActivate: [RolusuarioGuard]},
   {path: 'juegos', loadChildren: () => import('./modulojuego/modulojuego.module').then(m => m.ModulojuegoModule) },
   {path:"**",component:ErrorComponent},
 
