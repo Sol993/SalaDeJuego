@@ -27,7 +27,7 @@ export class RolusuarioGuard implements CanActivate {
     if ( rol == "Administrador") {
       this.admin = true;
     } else {
-      this.router.navigate(['home']);
+      this.router.navigate(['accesodenegado']);
 
     }     
   return this.admin;

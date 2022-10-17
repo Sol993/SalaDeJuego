@@ -23,6 +23,7 @@ import { SaladechatsComponent } from './componentes/saladechats/saladechats.comp
 import { HttpClientModule } from '@angular/common/http';
 import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
 import { ResultadoencuestaComponent } from './componentes/resultadoencuesta/resultadoencuesta.component';
+import { AccesodenegadoComponent } from './componentes/accesodenegado/accesodenegado.component';
 
 
 
@@ -41,6 +42,7 @@ import { ResultadoencuestaComponent } from './componentes/resultadoencuesta/resu
     SaladechatsComponent,
     EncuestaComponent,
     ResultadoencuestaComponent,
+    AccesodenegadoComponent,
    
     
   ],

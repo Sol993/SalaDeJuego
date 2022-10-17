@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Resultadojuegos } from './clases/resultadojuegos';
+import { AccesodenegadoComponent } from './componentes/accesodenegado/accesodenegado.component';
 import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
 import { ErrorComponent } from './componentes/error/error.component';
 import { HomeComponent } from './componentes/home/home.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:"registro",component:RegistroComponent},
   {path:"saladechats",component:SaladechatsComponent},
   {path:"encuesta",component:EncuestaComponent},
+  {path:"accesodenegado",component:AccesodenegadoComponent},
   {path:"listadoencuesta",component:ResultadoencuestaComponent,canActivate: [RolusuarioGuard]},
   {path: 'juegos', loadChildren: () => import('./modulojuego/modulojuego.module').then(m => m.ModulojuegoModule) },
   {path:"**",component:ErrorComponent},
