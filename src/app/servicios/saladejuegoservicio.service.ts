@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import{ AngularFireAuth }from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection  } from '@angular/fire/compat/firestore';
 import Swal from 'sweetalert2';
-
-
-import firebase from '@firebase/app-compat';
 import { Logdeusuarios } from '../clases/logdeusuarios';
 import { Saladechats } from '../clases/saladechats';
 import { Resultadojuegos } from '../clases/resultadojuegos';
@@ -45,9 +42,8 @@ export class SaladejuegoservicioService {
        this._db.collection("usuarios").ref.where("email", "==", user.user?.email).onSnapshot(snap =>{
          snap.forEach(userRef => {
            this.currentUser = userRef.data();
-           localStorage.setItem("usuario",JSON.stringify(this.currentUser))
-           localStorage.setItem('rol',this.currentUser.rol);
-           console.log(this.currentUser.rol);
+           let idUsuario:string = this.currentUser.idUsuario
+           localStorage.setItem("usuarioID", idUsuario)
          })
        })
       })
@@ -86,8 +82,7 @@ export class SaladejuegoservicioService {
   async logOut()
   {
     this._auth.signOut();
-    localStorage.removeItem('rol'),
-    localStorage.removeItem('usuario')
+    localStorage.removeItem('usuarioID')
   }
   getInfoUsuarioLoggeado()
   {

@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { ReCaptchaEnterpriseProvider } from 'firebase/app-check';
 import { map, Observable } from 'rxjs';
-import { Rol } from '../clases/rol';
-import { Usuario } from '../clases/usuario';
 import { SaladejuegoservicioService } from '../servicios/saladejuegoservicio.service';
 
 @Injectable({
@@ -12,8 +9,6 @@ import { SaladejuegoservicioService } from '../servicios/saladejuegoservicio.ser
 
 export class RolusuarioGuard implements CanActivate {
 
-  admin: boolean = false;
-
   constructor(private router: Router, private _serv: SaladejuegoservicioService) {
   
   }
@@ -21,8 +16,40 @@ export class RolusuarioGuard implements CanActivate {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable <boolean>| Promise<boolean> | boolean{
-    let rol= localStorage.getItem("rol");
+    state: RouterStateSnapshot):Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree{
+      let id = localStorage.getItem("usuarioID");
+      if(id !== null){
+
+      return this._serv.obtenerUsuarioPorID(id).snapshotChanges().pipe(
+        map(changes =>
+          changes.map(c =>
+            ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+          )
+        )
+      ).pipe(map((data) => {
+        if ( data[0].rol == "Administrador") {
+          return true;
+        } else {
+
+          this.router.navigate(['accesodenegado']);
+          return false;
+        }    
+  
+      }));
+    } else{
+      this.router.navigate(['accesodenegado']);
+      return false;
+    }
+      /*return this._serv.getInfoUsuarioLoggeado().pipe(map((res) => {
+        if(res != null){
+          return true
+        } else{
+          return false
+        }   
+      }));
+
+
+    /*let rol= localStorage.getItem("rol");
    
     if ( rol == "Administrador") {
       this.admin = true;
@@ -30,7 +57,7 @@ export class RolusuarioGuard implements CanActivate {
       this.router.navigate(['accesodenegado']);
 
     }     
-  return this.admin;
+  return this.admin;*/
 
 
  

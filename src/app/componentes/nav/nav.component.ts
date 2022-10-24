@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SaladejuegoservicioService } from 'src/app/servicios/saladejuegoservicio.service';
 import { Router } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
@@ -16,7 +17,6 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarioLogueado();
-    this.usuarioAdmin();
   }
 
 
@@ -24,7 +24,23 @@ export class NavComponent implements OnInit {
     this._auth.getInfoUsuarioLoggeado().subscribe(res => {
       if (res !== null) {
         this.logueado = true;
-        this.usuario = res;
+
+        this._auth.obtenerUsuarioPorID(res.uid).snapshotChanges().pipe(
+          map(changes =>
+            changes.map(c =>
+              ({ id: c.payload.doc.id, ...c.payload.doc.data() })
+            )
+          )
+        ).subscribe(data => {
+          this.usuario = data[0];
+          if (this.usuario.rol == "Administrador") {
+            this.logueadoAdmin=true;
+          } else {
+            this.logueadoAdmin = false;
+          }
+
+        });
+
       } else {
         this.logueado = false;
       }
@@ -33,17 +49,8 @@ export class NavComponent implements OnInit {
   cerrarSesion(): void {
     this._auth.logOut().then (res=>{
       this.logueado= false;
-      localStorage.removeItem("usuario");
       this._router.navigate(['/']);
     });
-  }
-  usuarioAdmin(){
-    let rol= localStorage.getItem("rol");
-    if ( rol == "Administrador") {
-      this.logueadoAdmin=true;
-    } else {
-      this.logueadoAdmin = false;
-    }
   }
 
 }
